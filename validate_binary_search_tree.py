@@ -1,3 +1,5 @@
+# MEDIUM
+#
 # Given the root of a binary tree, determine if it is a valid binary search tree (BST).
 # A valid BST is defined as follows:
 # The left subtree of a node contains only nodes with keys less than the node's key.
@@ -34,20 +36,24 @@ class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         return self.validate(root, None, None)
 
-    def validate(self, node: Optional[TreeNode], least: Optional[int], most: Optional[int]) -> bool:
+    def validate(
+        self, node: Optional[TreeNode], least: Optional[int], most: Optional[int]
+    ) -> bool:
         if not node:
             return True
         elif least is not None and node.val <= least:
             return False
         elif most is not None and node.val >= most:
             return False
-        
-        return self.validate(node.left, least, node.val) and self.validate(node.right, node.val, most)
+
+        return self.validate(node.left, least, node.val) and self.validate(
+            node.right, node.val, most
+        )
 
 
 if __name__ == "__main__":
     solution = Solution()
-    
+
     root1 = TreeNode(2)
     root1.left = TreeNode(1)
     root1.right = TreeNode(3)
