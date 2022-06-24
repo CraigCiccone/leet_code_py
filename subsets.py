@@ -29,9 +29,7 @@ class Solution:
         self.collect(nums, subset, answer)
         return answer
 
-    def collect(
-        self, nums: List[int], subset: List[int], answer: List[List[int]]
-    ):
+    def collect(self, nums: List[int], subset: List[int], answer: List[List[int]]):
         if len(nums) == 0:
             answer.append(subset)
         else:
