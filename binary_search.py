@@ -1,8 +1,8 @@
 # EASY
 #
-# Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums.
-# If target exists, then return its index. Otherwise, return -1.
-# You must write an algorithm with O(log n) runtime complexity.
+# Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to
+# search target in nums. If target exists, then return its index. Otherwise, return -1. You must write an algorithm
+# with O(log n) runtime complexity.
 #
 # Example 1:
 
@@ -29,11 +29,10 @@ from typing import List
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         low = 0
-        mid = 0
         high = len(nums) - 1
 
         while low <= high:
-            mid = high + low // 2
+            mid = low + (high - low) // 2
 
             if nums[mid] < target:
                 low = mid + 1
@@ -49,3 +48,8 @@ if __name__ == "__main__":
     solution = Solution()
     print(solution.search([-1, 0, 3, 5, 9, 12], 9))
     print(solution.search([-1, 0, 3, 5, 9, 12], 2))
+    print(solution.search([3, 4, 5, 6, 7, 8, 9], 4))
+    print(solution.search([1, 3, 4, 5, 6, 7, 8, 9], 1))
+    print(solution.search([1, 3, 4, 5, 6, 7, 8, 9], 9))
+    print(solution.search([1, 3, 4, 6, 7, 8, 9], 6))
+    print(solution.search([1, 3, 4, 6, 7, 8, 9], 3))
