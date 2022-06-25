@@ -1,7 +1,7 @@
 # EASY
 #
-# Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
-# An input string is valid if:
+# Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string
+# is valid. An input string is valid if:
 # Open brackets must be closed by the same type of brackets.
 # Open brackets must be closed in the correct order.
 #
@@ -32,41 +32,21 @@ from typing import List
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-        chars = [char for char in s]
 
-        for char in chars:
-            match char:
-                case "(":
-                    stack.append(char)
-                case "[":
-                    stack.append(char)
-                case "{":
-                    stack.append(char)
-                case ")":
-                    if self.valid("(", stack):
-                        continue
-                    else:
-                        return False
-                case "]":
-                    if self.valid("[", stack):
-                        continue
-                    else:
-                        return False
-                case "}":
-                    if self.valid("{", stack):
-                        continue
-                    else:
-                        return False
+        for char in s:
+            if char in ["(", "[", "{"]:
+                stack.append(char)
+            elif char == ")":
+                if len(stack) == 0 or stack.pop() != "(":
+                    return False
+            elif char == "]":
+                if len(stack) == 0 or stack.pop() != "[":
+                    return False
+            elif char == "}":
+                if len(stack) == 0 or stack.pop() != "{":
+                    return False
 
         return len(stack) == 0
-
-    def valid(self, expected: str, stack: List[str]) -> bool:
-        if len(stack) == 0:
-            return False
-        elif expected == stack.pop():
-            return True
-        else:
-            return False
 
 
 if __name__ == "__main__":

@@ -33,6 +33,14 @@ from typing import List
 
 
 class Solution:
+    def two_num_naive(self, nums: List[int], target: int) -> List[int]:
+        for (i, num1) in enumerate(nums):
+            for (j, num2) in enumerate(nums):
+                if i != j and num1 + num2 == target:
+                    return [i, j]
+
+        return []
+
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         compliments = {}
 
