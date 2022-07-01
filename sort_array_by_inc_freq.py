@@ -39,8 +39,9 @@ class Solution:
             freq[num] = freq.get(num, 0) + 1
 
         freq_sorted = list(freq.items())
-        freq_sorted.sort(key=lambda x: x[0], reverse=True)
-        freq_sorted.sort(key=lambda x: x[1])
+        # freq_sorted.sort(key=lambda x: x[0], reverse=True)
+        # freq_sorted.sort(key=lambda x: x[1])
+        freq_sorted.sort(key=lambda x: (x[1], -x[0]))
 
         for key, val in freq_sorted:
             result.extend([key] * val)
