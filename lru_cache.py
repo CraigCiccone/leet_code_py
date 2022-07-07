@@ -40,7 +40,7 @@
 from collections import OrderedDict
 
 
-class LRUCache:
+class LRUCacheOrderedDict:
     def __init__(self, capacity: int):
         self.capacity = capacity
         self.cache = OrderedDict()
@@ -66,9 +66,77 @@ class LRUCache:
         return f"{self.cache}"
 
 
+class Node:
+
+    def __init__(self, key: int, value: int):
+        self.key = key
+        self.value = value
+        self.prev = None
+        self.next = None
+
+    def __repr__(self) -> str:
+        return f"{self.key, self.value}"
+
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.lookup = {}
+        self.head = Node(-1, -1)  # dummy head
+        self.tail = Node(-2, -2)  # dummy tail
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def get(self, key: int) -> int:
+        if key in self.lookup:
+            node = self.lookup[key]
+            self.remove_node(node)
+            self.put_node_at_head(node)
+            return node.value
+        else:
+            return -1
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.lookup:
+            node = self.lookup[key]
+            node.value = value
+            self.remove_node(node)
+            self.put_node_at_head(node)
+        else:
+            if len(self.lookup) == self.capacity:
+                self.evict_node_at_tail()
+
+            node = Node(key, value)
+            self.lookup[key] = node
+            self.put_node_at_head(node)
+
+    def put_node_at_head(self, node: Node):
+        head_next = self.head.next
+        self.head.next = node
+        node.prev = self.head
+        node.next = head_next
+        head_next.prev = node
+
+    def evict_node_at_tail(self):
+        tail = self.tail.prev
+        del self.lookup[tail.key]
+        self.remove_node(tail)
+
+    @staticmethod
+    def remove_node(node: Node):
+        node.next.prev = node.prev
+        node.prev.next = node.next
+
+    def __repr__(self) -> str:
+        return f"{self.lookup}"
+
+
 if __name__ == "__main__":
     lru_cache = LRUCache(2)
     lru_cache.put(1, 1)  # cache is {1=1}
+    print(lru_cache)
+    lru_cache.put(2, 3)  # cache is {1=1, 2=3}
     print(lru_cache)
     lru_cache.put(2, 2)  # cache is {1=1, 2=2}
     print(lru_cache)

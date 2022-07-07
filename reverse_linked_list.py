@@ -44,19 +44,30 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        new_head = None
+
+        while head:
+            tmp_next = head.next
+            head.next = new_head
+            new_head = head
+            head = tmp_next
+
+        return new_head
+
+    def reverseList_recursive(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if head is None:
             return head
 
-        return self.reverse(head, None)
+        return self.reverse_recursive(head, None)
 
-    def reverse(self, cur: ListNode, next=Optional[ListNode]) -> Optional[ListNode]:
+    def reverse_recursive(self, cur: ListNode, next=Optional[ListNode]) -> Optional[ListNode]:
         remaining = cur.next
         cur.next = next
 
         if remaining is None:
             return cur
         else:
-            return self.reverse(remaining, cur)
+            return self.reverse_recursive(remaining, cur)
 
 
 if __name__ == "__main__":
