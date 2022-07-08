@@ -60,7 +60,9 @@ class Solution:
 
         return self.reverse_recursive(head, None)
 
-    def reverse_recursive(self, cur: ListNode, next=Optional[ListNode]) -> Optional[ListNode]:
+    def reverse_recursive(
+        self, cur: ListNode, next=Optional[ListNode]
+    ) -> Optional[ListNode]:
         remaining = cur.next
         cur.next = next
 

@@ -67,7 +67,6 @@ class LRUCacheOrderedDict:
 
 
 class Node:
-
     def __init__(self, key: int, value: int):
         self.key = key
         self.value = value
@@ -79,7 +78,6 @@ class Node:
 
 
 class LRUCache:
-
     def __init__(self, capacity: int):
         self.capacity = capacity
         self.lookup = {}

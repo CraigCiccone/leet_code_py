@@ -49,14 +49,13 @@ class Solution:
             ):
                 flowerbed[idx] = 1
                 placed += 1
-            else:
-                if (
-                    flowerbed[idx - 1] == 0
-                    and flowerbed[idx] == 0
-                    and flowerbed[idx + 1] == 0
-                ):
-                    flowerbed[idx] = 1
-                    placed += 1
+            elif (
+                flowerbed[idx - 1] == 0
+                and flowerbed[idx] == 0
+                and flowerbed[idx + 1] == 0
+            ):
+                flowerbed[idx] = 1
+                placed += 1
 
         return placed >= n
 

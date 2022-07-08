@@ -34,16 +34,17 @@
 # It is guaranteed that there will be at least k elements in the array when you search for the kth element.
 
 from typing import List
+from bisect import insort
 
 
 class KthLargest:
     def __init__(self, k: int, nums: List[int]):
         self.k = k
+        nums.sort()
         self.nums = nums
 
     def add(self, val: int) -> int:
-        self.nums.append(val)
-        self.nums.sort()
+        insort(self.nums, val)
         return self.nums[-self.k]
 
 
