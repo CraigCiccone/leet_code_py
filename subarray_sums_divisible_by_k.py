@@ -21,25 +21,27 @@
 # -10^4 <= nums[i] <= 10^4
 # 2 <= k <= 10^4
 
+from collections import defaultdict
 from typing import List
 
 
 class Solution:
     def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        remainders = defaultdict(int)
         count = 0
         cur_sum = 0
-        prefixes = {}
 
-        for idx in range(len(nums)):
-            cur_sum += nums[idx]
+        for num in nums:
+            cur_sum += num
+            remainder = cur_sum % k
 
-            if cur_sum % k == 0:
+            if remainder == 0:
                 count += 1
 
-            if cur_sum % k in prefixes:
-                count += prefixes[cur_sum % k]
+            if remainder in remainders:
+                count += remainders[remainder]
 
-            prefixes[cur_sum % k] = prefixes.get(cur_sum % k, 0) + 1
+            remainders[remainder] += 1
 
         return count
 
