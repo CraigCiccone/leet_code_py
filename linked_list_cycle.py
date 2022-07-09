@@ -40,6 +40,9 @@ class ListNode:
         self.val = x
         self.next = None
 
+    def __repr__(self) -> str:
+        return f"{self.val}"
+
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
@@ -48,7 +51,7 @@ class Solution:
         if head is None:
             return False
 
-        while head.next:
+        while head:
             if head in seen:
                 return True
             seen[head] = head.val
@@ -64,7 +67,7 @@ if __name__ == "__main__":
     head1.next = ListNode(2)
     head1.next.next = ListNode(0)
     head1.next.next.next = ListNode(-4)
-    head1.next.next.next.next = head1.next.next
+    head1.next.next.next.next = head1.next
     print(solution.hasCycle(head1))
 
     head2 = ListNode(1)
