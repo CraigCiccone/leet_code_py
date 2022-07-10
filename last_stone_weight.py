@@ -37,7 +37,6 @@ class Solution:
         # heapq is a min heap, so use negative weights to simulate max heap
         stones = list(map(lambda s: s * -1, stones))
         heapify(stones)
-        print(stones)
 
         while len(stones) > 1:
             x = heappop(stones)
